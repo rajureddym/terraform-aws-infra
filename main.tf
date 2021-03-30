@@ -1,6 +1,8 @@
+//provider configuration: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
 provider "aws" {
-  profile = "default"
-  region  = "us-east-2"
+  profile = var.aws-credentials-profile
+  region  = var.aws-region
 }
 
 module "network" {
