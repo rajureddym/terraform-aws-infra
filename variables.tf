@@ -7,3 +7,8 @@ variable "aws-credentials-profile" {
     type = string
     description = "specify the credential profile that you would like to use, see ~/.aws/credentials"
 }
+
+variable "ssh_keypair" {
+    type = string 
+    description = "Enter SSH keypair name"
+}

@@ -1,4 +1,3 @@
-
 variable "vpcId" {
   type = string
 }
@@ -37,7 +36,7 @@ variable "ec2_instance_type" {
 
 variable "ssh_keypair" {
     type = string 
-    default = "us-east-2-KeyPair"
+    description = "Enter SSH keypair name"
 }
 
 variable "image_id" {

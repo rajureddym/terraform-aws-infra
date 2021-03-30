@@ -6,17 +6,17 @@ provider "aws" {
 }
 
 module "network" {
- source = "./networking"
+ source = "./modules/networking"
 }
 
 module "security" {
- source = "./security"
+ source = "./modules/security"
  vpcId = module.network.myVpcId
  vpcCidr = module.network.myVpcCidr
 }
 
 module "compute" {
-    source = "./computing"
+    source = "./modules/computing"
     private_subnets = [module.network.myPriavteSubnetId-01, module.network.myPriavteSubnetId-02]
     public_subnets = [module.network.myPublicSubnetId-01, module.network.myPublicSubnetId-02]
     vpcId = module.network.myVpcId
@@ -24,11 +24,11 @@ module "compute" {
     InstanceSg = module.security.myInstanceSgForECS
     InstanceProfileRole = module.security.myInstanceProfileForECS
     AlbSg  = module.security.myAlbIngressSg
-
+    ssh_keypair = var.ssh_keypair
 }
 
 module "ecs" {
-    source = "./ecs"
+    source = "./modules/ecs"
     private_subnets = [module.network.myPriavteSubnetId-01, module.network.myPriavteSubnetId-02]
     TaskSg = module.security.myEcsTaskSg 
     TaskExecRole = module.security.myEcsTaskExecutionRole
